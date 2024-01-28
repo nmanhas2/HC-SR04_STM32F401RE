@@ -1,0 +1,9 @@
+../Src/gpio.c:41:6:gpio_init	24	static
+../Src/gpio.c:85:6:gpio_set_otyper	24	static
+../Src/gpio.c:106:6:gpio_set_moder	24	static
+../Src/gpio.c:123:6:gpio_set_pupdr	24	static
+../Src/gpio.c:144:6:gpio_toggle_output	24	static
+../Src/gpio.c:157:6:gpio_write_output	24	static
+../Src/gpio.c:175:9:gpio_input_read	24	static
+../Src/gpio.c:189:6:gpio_output_bit_setreset	24	static
+../Src/gpio.c:210:6:gpio_alt_func	24	static
