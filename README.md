@@ -3,7 +3,7 @@ HC-SR04 Test Project
 Using this NUCLEO Dev-board: https://www.st.com/en/evaluation-tools/nucleo-f401re.html, and STM32CubeIDE 
 Using this ultrasonic sensor: https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf
 
-This repo contains libraries that I've made for Timers, and other functionalities, which can be seen here if you want to test them out and see how to set it up if you're having issues: https://github.com/nmanhas2/LIBRARIES_STM32F401
+This repo contains libraries that I've made for Timers, and other functionalities, as well as the ARM CMSIS package which can be seen here if you want to test them out and see how to set it up if you're having issues: https://github.com/nmanhas2/LIBRARIES_STM32F401
 
 This project is specifically for the HC-SR04 ultrasonic sensor for ranging purposes. It uses the input capture functionality for the timer TIM2 within the F401RE MCU, SYSTICK timer for a delay, UART2 for transmitting the measured distance, and interrupts for detecting rising and falling edge to determine the pulse width based on the input capture count. 
 
