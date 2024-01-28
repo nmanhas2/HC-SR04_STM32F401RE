@@ -49,31 +49,50 @@ const int TEN_MICROSECONDS_COUNT = 1;
 //will happen before the trigger pin goes high
 const int TRIGGER_DELAY_MILLISECONDS = 60;
 
+/*
+ * Enumeration to keep track of ultrasonic state
+ *
+ * There will be three phases, based on the ultrasonic datasheet, with an additional fourth for measurement computation:
+ *
+ * TRIGGER_HIGH: set trigger pin high and wait at least 10uS, then set the trigger pin back to low
+ * ECHO_RISING: capture timer count during the rising edge of the echo input capture, then change polarity to falling edge
+ * ECHO_FALLING: capture timer count during the falling edge of the echo input capture, then disable interrupts
+ * MEASUREMENT: compute the distance in CM by using the formula in the ultrasonic datasheet, display over UART, and reset
+ * 				the state machine back to TRIGGER_HIGH
+ */
+typedef enum
+{
+	TRIGGER_HIGH,
+	ECHO_RISING,
+	ECHO_FALLING,
+	MEASUREMENT
+}ULTRASONIC_STATE;
+
 //UART with PA3 as RX, PA2 as TX for USART2
 UART_CONFIG UART2 = {
-					 USART2_RX_PA3,
-					 USART2_TX_PA2,
-					 USART2,
-					 GPIOA
-					};
+		     USART2_RX_PA3,
+		     USART2_TX_PA2,
+		     USART2,
+		     GPIOA
+                    };
 
 //configuration for about 10us timer
 TIM2_5_CONFIG TMR2 = {
-					  TIM2,
-					  TIM2_5_UP,
-					  PRESCALER,
-					  PERIOD
-					 };
+		      TIM2,
+		      TIM2_5_UP,
+		      PRESCALER,
+                      PERIOD
+		     };
 
 //trigger pin, this needs to go high for 10us to start the distancing
 //this is why it is configured as an output
 GPIOx_PIN_CONFIG TRIGGER_PIN = {
-								GPIOx_PIN_0,
-								GPIOx_PIN_OUTPUT,
-								0,
-								GPIOx_PUPDR_NONE,
-								GPIOx_OTYPER_PUSH_PULL
-					   	   	   };
+				GPIOx_PIN_0,
+				GPIOx_PIN_OUTPUT,
+				0,
+				GPIOx_PUPDR_NONE,
+				GPIOx_OTYPER_PUSH_PULL
+				};
 
 //echo pin configuration as an input capture on TIM2 using channel 2 and PA1.
 //8 40KHz ultrasound signals will be sent out from this pin once the TRIGGER_PIN is set to high for 10uS.
@@ -81,14 +100,12 @@ GPIOx_PIN_CONFIG TRIGGER_PIN = {
 //the input capture rising edge and falling edge polarities will be used to capture the counts, and essentially
 //determine the width based on this.
 TIM2_5_CAPTURE_COMPARE_CONFIG ECHO_PIN = {
-										  TIM2_CH2_PA1,
-										  GPIOA,
-										  TIM2_5_INPUT,
-										  TIM2_5_CH2,
-										  TIM2_5_NONE
-										 };
-
-
+					  TIM2_CH2_PA1,
+					  GPIOA,
+					  TIM2_5_INPUT,
+					  TIM2_5_CH2,
+					  TIM2_5_NONE
+					 };
 
 //integers to store counter values during the rising edge/falling edge of the echo pin input capture.
 volatile int risingCount = 0;
@@ -97,16 +114,13 @@ volatile int fallingCount = 0;
 //enum to keep track of current state of ultrasonic sensor
 ULTRASONIC_STATE CURRENT_STATE = TRIGGER_HIGH;
 
-
-
 //char buffer for uart transmitting
 char str[30];
 int main(void)
 {
-
 	//init uart at 115200 baud
 	uart_init(UART2, UART_BAUDRATE);
-
+	
 	//configure trigger pin for GPIOA
 	gpio_init(GPIOA, TRIGGER_PIN);
 	#ifdef HCSR04_TEST
