@@ -1,0 +1,9 @@
+../Src/gpio.c:41:6:gpio_init	8
+../Src/gpio.c:85:6:gpio_set_otyper	3
+../Src/gpio.c:106:6:gpio_set_moder	1
+../Src/gpio.c:123:6:gpio_set_pupdr	2
+../Src/gpio.c:144:6:gpio_toggle_output	1
+../Src/gpio.c:157:6:gpio_write_output	2
+../Src/gpio.c:175:9:gpio_input_read	1
+../Src/gpio.c:189:6:gpio_output_bit_setreset	3
+../Src/gpio.c:210:6:gpio_alt_func	3

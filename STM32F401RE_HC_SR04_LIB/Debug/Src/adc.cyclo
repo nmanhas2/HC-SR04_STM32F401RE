@@ -1,0 +1,5 @@
+../Src/adc.c:29:6:adc_init	4
+../Src/adc.c:75:6:sequence_config	6
+../Src/adc.c:117:6:adc_start_single	1
+../Src/adc.c:123:6:adc_start_continuous	1
+../Src/adc.c:130:10:adc_read	2

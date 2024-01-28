@@ -1,0 +1,7 @@
+../Src/uart.c:29:6:uart_init	5
+../Src/uart.c:102:6:uart_enable_clk	4
+../Src/uart.c:128:6:uart_baudrate	4
+../Src/uart.c:176:6:uart_cr1_enable	3
+../Src/uart.c:196:6:uart_write	2
+../Src/uart.c:206:6:uart_write_string	2
+../Src/uart.c:219:6:uart_read	2
